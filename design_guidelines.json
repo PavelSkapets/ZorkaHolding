@@ -1,0 +1,81 @@
+{
+  "theme": "light",
+  "typography": {
+    "font_family": "Inter",
+    "headings": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-white leading-tight",
+      "h2": "text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-[#0F2742]",
+      "h3": "text-xl md:text-2xl font-normal tracking-tight text-[#30343B]",
+      "h4": "text-lg font-medium text-[#0F2742]"
+    },
+    "body": "text-base md:text-lg text-[#30343B] font-light leading-relaxed",
+    "accent": "uppercase text-xs md:text-sm tracking-[0.2em] text-[#B38B45] font-medium"
+  },
+  "colors": {
+    "primary": "#0F2742",
+    "secondary": "#30343B",
+    "accent": "#B38B45",
+    "background": "#FFFFFF",
+    "surface": "#F9FAFB",
+    "border": "#E5E7EB"
+  },
+  "layouts": {
+    "spacing_scale": "generous (py-24 to py-32 for sections)",
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "nav": "fixed top-0 w-full z-50 transition-all duration-300",
+    "hero": "relative h-screen w-full flex flex-col justify-center items-center text-center px-4",
+    "grid_criteria": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6",
+    "about_section": "grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center",
+    "portfolio_grid": "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16"
+  },
+  "components": {
+    "hero": {
+      "video_url": "https://customer-assets.emergentagent.com/job_c5ae29dc-299d-4495-889b-3765e728b236/artifacts/y06ju3hp_15749241_3840_2160_24fps%20%281%29.mp4",
+      "instructions": "Full viewport height (`min-h-screen`). Use the exact video URL for the background `<video autoPlay loop muted playsInline>` with `object-cover`. Overlay with `bg-[#0F2742]/60` or `bg-black/50`. Vertically center headline ('Creating Value Through Commercial Real Estate') and subhead. NO call-to-action buttons. Add a subtle thin vertical line animating down at the bottom center for scroll indication."
+    },
+    "navbar": {
+      "instructions": "At the very top, text should be white and background transparent. Upon scrolling past 50px, transition to `bg-white` with `text-[#0F2742]` and a subtle `border-b border-[#E5E7EB]`. Logo on left. Navigation items (`About`, `Our Mission`, `Investment Criteria`, `Portfolio`, `Contact`) on right. MUST ensure high contrast at all times."
+    },
+    "criteria_card": {
+      "instructions": "Render the 11 investment criteria in extremely clean, minimalistic cards. `bg-white`, thin border `border-[#30343B]/10`, padding `p-6 md:p-8`. Hover effect: subtle lift (`-translate-y-1`) and `shadow-lg`. Use sharp corners (`rounded-none` or `rounded-sm`) to maintain an institutional aesthetic. Optionally, add a 2px top border of `#B38B45` on hover."
+    },
+    "about_section": {
+      "instructions": "Left side (col-span-5): Founder photo of Paul Skapets (use user-attached photo or a fallback placeholder), aspect ratio 3:4. Right side (col-span-7): Story text using generous `leading-relaxed` typography. Emphasize construction, manufacturing, and strong partnerships."
+    },
+    "mission_banner": {
+      "instructions": "Full width, deep navy `bg-[#0F2742]`. Text pure white. Accent gold `#B38B45`. Minimalist and elegant block emphasizing 'Value First'. Large typography for the core message."
+    },
+    "portfolio_item": {
+      "instructions": "Two large neutral gray placeholders `bg-[#E5E7EB]` to represent projects (NO stock imagery). Aspect ratio 16:9 or 4:3. Below placeholder: H3 title in `#0F2742` and brief subtext in `#30343B`."
+    },
+    "contact_block": {
+      "instructions": "Centered, text-based block using large typography. Phone, Email, Location displayed elegantly. Static information only—NO form elements."
+    },
+    "footer": {
+      "instructions": "Minimal, elegant. Company name, copyright, and 'Commercial Real Estate Investments'. Background white or `#0F2742`, text matching contrast."
+    }
+  },
+  "motion": {
+    "libraries_required": ["framer-motion", "lucide-react"],
+    "scroll_animations": "Implement smooth scrolling (if possible with pure React, otherwise standard CSS scroll-behavior: smooth). Use framer-motion `whileInView` for subtle fade-in and slide-up (y: 30) when sections enter the viewport.",
+    "hover_effects": "Transitions should use `ease-out duration-300`. Lift elements slightly rather than aggressive scaling."
+  },
+  "instructions_to_main_agent": [
+    "You MUST write `.js` or `.jsx` files. DO NOT output `.tsx` files as the environment uses JavaScript.",
+    "Adhere strictly to the color palette: #0F2742 (navy), #30343B (charcoal), #B38B45 (gold), and white. Do not invent new colors.",
+    "Use Inter font globally. Despite its standard appearance, use `font-light` and `tracking-tight` on large headings to create a sophisticated, high-end institutional look.",
+    "Ensure the hero background video works properly and is covered by a dark overlay for text legibility.",
+    "Do not add any call-to-action buttons in the hero.",
+    "Order of sections must be: Hero -> Investment Criteria -> About -> Mission -> Portfolio -> Contact.",
+    "Assume user attached files are available. For images like the logo and founder photo, structure image tags to load them ideally from `/logo.png` or `/founder.jpg`. If missing, the `<img alt='...'>` and context will handle it.",
+    "DO NOT use a transparent background for the navbar when the user scrolls past the hero. It must have a solid background to prevent text overlap.",
+    "Add `data-testid` to all major sections, links, cards, and text elements to ensure test coverage."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use generic centered layouts. Use structured grid systems (like 12-column) for content sections.",
+    "Create depth through subtle layered design elements and refined typography rather than heavy shadows or gradients.",
+    "Never apply universal transition (`transition: all`). Use specific properties (`transition-colors`, `transition-transform`).",
+    "Keep spacing generous (`py-24`, `px-6`) to create visual breathing room.",
+    "Do not add generic icons like 🤖🧠💭. Use sleek SVG icons from `lucide-react` only when functionally necessary (e.g., down arrow for scroll indicator)."
+  ]
+}
