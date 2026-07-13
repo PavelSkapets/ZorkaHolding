@@ -2,14 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: #ffffff;
+    color: #30343B;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+::selection {
+    background: #0F2742;
+    color: #ffffff;
 }
 
 code {
@@ -65,11 +76,6 @@ code {
         --border: 0 0% 14.9%;
         --input: 0 0% 14.9%;
         --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
     }
 }
 
@@ -82,34 +88,162 @@ code {
     }
 }
 
-@layer base {
-    [data-debug-wrapper="true"] {
-        display: contents !important;
+/* Scroll indicator animation */
+@keyframes scrollLine {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
     }
+    50% {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+    50.01% {
+        transform-origin: bottom;
+    }
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+}
 
-    [data-debug-wrapper="true"] > * {
-        margin-left: inherit;
-        margin-right: inherit;
-        margin-top: inherit;
-        margin-bottom: inherit;
-        padding-left: inherit;
-        padding-right: inherit;
-        padding-top: inherit;
-        padding-bottom: inherit;
-        column-gap: inherit;
-        row-gap: inherit;
-        gap: inherit;
-        border-left-width: inherit;
-        border-right-width: inherit;
-        border-top-width: inherit;
-        border-bottom-width: inherit;
-        border-left-style: inherit;
-        border-right-style: inherit;
-        border-top-style: inherit;
-        border-bottom-style: inherit;
-        border-left-color: inherit;
-        border-right-color: inherit;
-        border-top-color: inherit;
-        border-bottom-color: inherit;
+.scroll-line {
+    animation: scrollLine 2.4s ease-in-out infinite;
+}
+
+/* Section fade in */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slow ken burns for hero video */
+@keyframes slowZoom {
+    from {
+        transform: scale(1);
     }
+    to {
+        transform: scale(1.08);
+    }
+}
+
+.hero-video {
+    animation: slowZoom 30s ease-in-out infinite alternate;
+}
+
+/* Nav link hover underline */
+.nav-link {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background-color: #B38B45;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Criteria card hover */
+.criteria-card {
+    position: relative;
+    transition:
+        transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 400ms ease;
+}
+
+.criteria-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #B38B45;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.criteria-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 20px 40px -20px rgba(15, 39, 66, 0.18),
+        0 10px 20px -10px rgba(15, 39, 66, 0.08);
+    border-color: rgba(15, 39, 66, 0.2);
+}
+
+.criteria-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Portfolio hover */
+.portfolio-item {
+    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portfolio-placeholder {
+    transition:
+        transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 600ms ease;
+}
+
+.portfolio-item:hover .portfolio-placeholder {
+    transform: scale(1.03);
+    filter: brightness(0.94);
+}
+
+/* Section number/eyebrow */
+.eyebrow {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #B38B45;
+}
+
+/* Subtle grain overlay for hero */
+.grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.5;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* Fine divider line */
+.divider {
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(15, 39, 66, 0.2),
+        transparent
+    );
 }
