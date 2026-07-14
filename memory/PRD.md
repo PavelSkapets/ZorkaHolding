@@ -42,4 +42,4 @@ Hero → Investment Criteria → About → Mission → Portfolio → Contact →
 
 ## Notes
 - Backend intentionally unmodified — this is a pure static marketing site
-- Email `acquisitions@zorcaholding.com` uses spelling from problem statement (not brand "Zorka")
+- Email uses `acquisitions@zorkaholding.com` (corrected per user request).

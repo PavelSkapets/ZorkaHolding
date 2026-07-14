@@ -8,8 +8,9 @@ import { LANDING } from "@/constants/testIds";
  */
 
 const ASSETS = {
-  video:
-    "https://customer-assets.emergentagent.com/job_c5ae29dc-299d-4495-889b-3765e728b236/artifacts/y06ju3hp_15749241_3840_2160_24fps%20%281%29.mp4",
+  video: "/media/hero.mp4",
+  videoMobile: "/media/hero-720.mp4",
+  poster: "/media/hero-poster.jpg",
   logo:
     "https://customer-assets.emergentagent.com/job_c5ae29dc-299d-4495-889b-3765e728b236/artifacts/lpxgupq0_WhatsApp%20Image%202026-03-09%20at%205.04.18%20PM.jpg",
   founder:
@@ -229,13 +230,16 @@ function Hero() {
       <video
         data-testid={LANDING.heroVideo}
         className="hero-video absolute inset-0 w-full h-full object-cover"
-        src={ASSETS.video}
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-      />
+        poster={ASSETS.poster}
+      >
+        <source src={ASSETS.videoMobile} type="video/mp4" media="(max-width: 768px)" />
+        <source src={ASSETS.video} type="video/mp4" />
+      </video>
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-[#0F2742]/55" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
@@ -620,8 +624,8 @@ function Contact() {
             <ContactCard
               testId={LANDING.contactEmail}
               label="Email"
-              value="acquisitions@zorcaholding.com"
-              href="mailto:acquisitions@zorcaholding.com"
+              value="acquisitions@zorkaholding.com"
+              href="mailto:acquisitions@zorkaholding.com"
             />
             <ContactCard
               testId={LANDING.contactLocation}
