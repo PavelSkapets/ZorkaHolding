@@ -41,6 +41,19 @@ export const LANDING = {
   portfolioHeading: "portfolio-heading",
   portfolioItem: (id) => `portfolio-item-${id}`,
 
+  // Who We Work With
+  partners: "partners-section",
+  partnersEyebrow: "partners-eyebrow",
+  partnersHeading: "partners-heading",
+  partnersBody: "partners-body",
+  partnerCard: (id) => `partner-card-${id}`,
+
+  // Why Zorka Holding
+  why: "why-section",
+  whyEyebrow: "why-eyebrow",
+  whyHeading: "why-heading",
+  whyCard: (id) => `why-card-${id}`,
+
   // Contact
   contact: "contact-section",
   contactEyebrow: "contact-eyebrow",

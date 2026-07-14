@@ -11,8 +11,6 @@ const ASSETS = {
   video: "/media/hero.mp4",
   videoMobile: "/media/hero-720.mp4",
   poster: "/media/hero-poster.jpg",
-  logo:
-    "https://customer-assets.emergentagent.com/job_c5ae29dc-299d-4495-889b-3765e728b236/artifacts/lpxgupq0_WhatsApp%20Image%202026-03-09%20at%205.04.18%20PM.jpg",
   founder:
     "https://customer-assets.emergentagent.com/job_c5ae29dc-299d-4495-889b-3765e728b236/artifacts/dd6erigy_ChatGPT%20Image%20Jul%2013%2C%202026%2C%2012_28_50%20PM.png",
 };
@@ -26,17 +24,52 @@ const NAV_ITEMS = [
 ];
 
 const CRITERIA = [
-  { id: "industrial", label: "Industrial", group: "Asset Type" },
-  { id: "retail", label: "Retail", group: "Asset Type" },
-  { id: "mixed", label: "Mixed Commercial Assets", group: "Asset Type" },
-  { id: "size", label: "5,000 – 50,000 SF", group: "Size Range" },
-  { id: "multitenant", label: "Multi-tenant", group: "Structure" },
-  { id: "value-add", label: "Value-Add", group: "Strategy" },
-  { id: "vacancy", label: "20%+ Vacancy", group: "Opportunity" },
-  { id: "maintenance", label: "Deferred Maintenance", group: "Opportunity" },
-  { id: "management", label: "Management Challenges", group: "Opportunity" },
-  { id: "redevelopment", label: "Redevelopment Potential", group: "Opportunity" },
-  { id: "geography", label: "Greater Philadelphia — within one hour", group: "Geography" },
+  { id: "industrial", title: "Industrial", roman: "I" },
+  { id: "retail", title: "Retail", roman: "II" },
+  { id: "flex", title: "Flex Buildings", roman: "III" },
+];
+
+const CRITERIA_ATTRIBUTES = [
+  "Multi-Tenant",
+  "Value-Add",
+  "20%+ Vacancy",
+  "5,000 – 50,000 Square Feet",
+];
+
+const PARTNERS = [
+  { id: "owners", label: "Property Owners" },
+  { id: "brokers", label: "Brokers" },
+  { id: "banks", label: "Banks" },
+  { id: "investors", label: "Investors" },
+  { id: "developers", label: "Developers" },
+  { id: "tenants", label: "Tenants" },
+];
+
+const WHY_ZORKA = [
+  {
+    id: "construction",
+    title: "Construction Expertise",
+    body:
+      "Our extensive construction and manufacturing background allows us to recognize value beyond financial statements and execute projects efficiently.",
+  },
+  {
+    id: "execution",
+    title: "Fast Execution",
+    body:
+      "Disciplined underwriting, efficient decision-making, and reliable execution throughout the acquisition process.",
+  },
+  {
+    id: "creative",
+    title: "Creative Solutions",
+    body:
+      "Flexible acquisition structures tailored to the needs of sellers, brokers, lenders, and investment partners.",
+  },
+  {
+    id: "relationships",
+    title: "Long-Term Relationships",
+    body:
+      "We believe lasting partnerships are built on integrity, transparency, responsiveness, and consistently delivering value.",
+  },
 ];
 
 const PORTFOLIO = [
@@ -115,13 +148,17 @@ function Navbar() {
             aria-label="Zorka Holding"
           >
             {scrolled ? (
-              <div className="h-9 md:h-10 flex items-center overflow-hidden">
-                <img
-                  src={ASSETS.logo}
-                  alt="Zorka Holding"
-                  className="h-full w-auto object-contain"
-                  draggable={false}
-                />
+              <div className="flex items-baseline gap-2 select-none">
+                <span
+                  className="text-[#0F2742] text-xl md:text-2xl font-light tracking-[0.22em]"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  ZORKA
+                </span>
+                <span className="h-4 w-px bg-[#0F2742]/30" />
+                <span className="text-[#30343B]/70 text-[10px] md:text-[11px] font-medium tracking-[0.3em] uppercase">
+                  Holding
+                </span>
               </div>
             ) : (
               <div className="flex items-baseline gap-2 select-none">
@@ -240,9 +277,9 @@ function Hero() {
         <source src={ASSETS.videoMobile} type="video/mp4" media="(max-width: 768px)" />
         <source src={ASSETS.video} type="video/mp4" />
       </video>
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-[#0F2742]/55" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+      {/* Dark overlay — reduced ~18% for skyline visibility */}
+      <div className="absolute inset-0 bg-[#0F2742]/38" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/45" />
 
       <div className="relative z-10 min-h-screen flex flex-col justify-center items-center px-6 md:px-12 text-center">
         <div className="max-w-5xl">
@@ -254,10 +291,10 @@ function Hero() {
             className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.05]"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            Creating Value Through
+            Commercial Real Estate Investments
             <br />
             <span className="italic text-[#E4C68A] font-extralight">
-              Commercial Real Estate
+              Built on Value Creation
             </span>
           </h1>
 
@@ -316,15 +353,15 @@ function InvestmentCriteria() {
           </div>
           <div className="lg:col-span-6 lg:col-start-7 flex items-end">
             <p className="text-base md:text-lg text-[#30343B]/80 font-light leading-relaxed max-w-xl">
-              We pursue overlooked commercial assets across the Greater
-              Philadelphia region — properties where operational, physical, and
-              structural repositioning can generate durable, long-term returns
-              for our partners.
+              We focus on three asset classes across the Greater Philadelphia
+              region — pursuing multi-tenant properties where operational,
+              physical, and structural repositioning can generate durable,
+              long-term returns for our partners.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-[#E5E7EB]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {CRITERIA.map((c, i) => (
             <CriteriaCard key={c.id} item={c} index={i} />
           ))}
@@ -340,20 +377,32 @@ function CriteriaCard({ item, index }) {
     <div
       ref={ref}
       data-testid={LANDING.criteriaCard(item.id)}
-      className="criteria-card fade-in-section bg-white border border-transparent p-8 md:p-10 min-h-[180px] flex flex-col justify-between overflow-hidden cursor-default"
-      style={{ transitionDelay: `${Math.min(index * 40, 240)}ms` }}
+      className="criteria-card fade-in-section bg-white border border-[#E5E7EB] p-8 md:p-10 lg:p-12 flex flex-col cursor-default"
+      style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between mb-10 md:mb-12">
         <span className="text-[10px] uppercase tracking-[0.28em] text-[#B38B45] font-medium">
-          {item.group}
+          Asset Type
         </span>
-        <span className="text-xs font-mono text-[#30343B]/40">
-          {String(index + 1).padStart(2, "0")}
+        <span className="text-xs font-mono text-[#30343B]/40 tracking-widest">
+          {item.roman}
         </span>
       </div>
-      <h3 className="mt-10 text-lg md:text-xl font-normal text-[#0F2742] leading-snug tracking-tight">
-        {item.label}
+      <h3 className="text-2xl md:text-3xl font-light text-[#0F2742] leading-tight tracking-tight mb-8 md:mb-10">
+        {item.title}
       </h3>
+      <div className="h-px w-10 bg-[#B38B45] mb-8" />
+      <ul className="space-y-4">
+        {CRITERIA_ATTRIBUTES.map((attr) => (
+          <li
+            key={attr}
+            className="flex items-baseline gap-3 text-[#30343B]/85 font-light"
+          >
+            <span className="text-[#B38B45] text-xs mt-1">—</span>
+            <span className="text-sm md:text-base tracking-tight">{attr}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -504,6 +553,137 @@ function Mission() {
   );
 }
 
+/* ---------------------------- Who We Work With ---------------------------- */
+function WhoWeWorkWith() {
+  const ref = useReveal();
+  return (
+    <section
+      id="partners"
+      data-testid={LANDING.partners}
+      className="relative bg-white py-24 md:py-32 lg:py-40"
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div
+          ref={ref}
+          className="fade-in-section grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 md:mb-20"
+        >
+          <div className="lg:col-span-5">
+            <p data-testid={LANDING.partnersEyebrow} className="eyebrow mb-6">
+              04 · Who We Work With
+            </p>
+            <h2
+              data-testid={LANDING.partnersHeading}
+              className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-[#0F2742] leading-[1.1]"
+            >
+              Aligned across the
+              <br />
+              <span className="italic">entire ecosystem.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7 flex items-end">
+            <p
+              data-testid={LANDING.partnersBody}
+              className="text-base md:text-lg text-[#30343B]/80 font-light leading-relaxed max-w-xl"
+            >
+              Zorka Holding works closely with every participant in the
+              commercial real estate ecosystem — collaborating with owners,
+              brokers, lenders, investors, developers, and tenants to create
+              long-term value and successful outcomes for all sides.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-[#E5E7EB] border border-[#E5E7EB]">
+          {PARTNERS.map((p, i) => (
+            <PartnerCard key={p.id} item={p} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PartnerCard({ item, index }) {
+  const ref = useReveal();
+  return (
+    <div
+      ref={ref}
+      data-testid={LANDING.partnerCard(item.id)}
+      className="criteria-card fade-in-section bg-white p-6 md:p-8 min-h-[140px] flex flex-col justify-between cursor-default"
+      style={{ transitionDelay: `${Math.min(index * 60, 300)}ms` }}
+    >
+      <span className="text-xs font-mono text-[#30343B]/40 tracking-widest">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <h3 className="mt-6 text-base md:text-lg font-normal text-[#0F2742] leading-snug tracking-tight">
+        {item.label}
+      </h3>
+    </div>
+  );
+}
+
+/* --------------------------- Why Zorka Holding ---------------------------- */
+function WhyZorka() {
+  const ref = useReveal();
+  return (
+    <section
+      id="why"
+      data-testid={LANDING.why}
+      className="relative bg-[#F9FAFB] py-24 md:py-32 lg:py-40"
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div
+          ref={ref}
+          className="fade-in-section grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 md:mb-20"
+        >
+          <div className="lg:col-span-6">
+            <p data-testid={LANDING.whyEyebrow} className="eyebrow mb-6">
+              05 · Why Zorka Holding
+            </p>
+            <h2
+              data-testid={LANDING.whyHeading}
+              className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-[#0F2742] leading-[1.1]"
+            >
+              A disciplined edge in
+              <br />
+              <span className="italic">complex opportunities.</span>
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {WHY_ZORKA.map((item, i) => (
+            <WhyCard key={item.id} item={item} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhyCard({ item, index }) {
+  const ref = useReveal();
+  return (
+    <div
+      ref={ref}
+      data-testid={LANDING.whyCard(item.id)}
+      className="criteria-card fade-in-section bg-white border border-[#E5E7EB] p-8 md:p-10 lg:p-12 flex flex-col cursor-default"
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <span className="text-xs font-mono text-[#30343B]/40 tracking-widest">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <h3 className="mt-8 md:mt-10 text-xl md:text-2xl font-light text-[#0F2742] leading-tight tracking-tight">
+        {item.title}
+      </h3>
+      <div className="h-px w-10 bg-[#B38B45] my-6 md:my-8" />
+      <p className="text-sm md:text-base text-[#30343B]/85 font-light leading-relaxed">
+        {item.body}
+      </p>
+    </div>
+  );
+}
+
 /* -------------------------------- Portfolio ------------------------------- */
 function Portfolio() {
   const ref = useReveal();
@@ -520,7 +700,7 @@ function Portfolio() {
         >
           <div>
             <p data-testid={LANDING.portfolioEyebrow} className="eyebrow mb-6">
-              04 · Portfolio
+              06 · Portfolio
             </p>
             <h2
               data-testid={LANDING.portfolioHeading}
@@ -530,8 +710,9 @@ function Portfolio() {
             </h2>
           </div>
           <p className="max-w-md text-sm md:text-base font-light text-[#30343B]/70 leading-relaxed">
-            A curated look at recent investments. Additional projects will be
-            published as they close and stabilize.
+            Project images and detailed descriptions will be added as
+            acquisitions are completed and professional photography becomes
+            available.
           </p>
         </div>
 
@@ -605,13 +786,13 @@ function Contact() {
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div ref={ref} className="fade-in-section text-center">
           <p data-testid={LANDING.contactEyebrow} className="eyebrow mb-6">
-            05 · Contact
+            07 · Contact
           </p>
           <h2
             data-testid={LANDING.contactHeading}
             className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-[#0F2742] leading-[1.1] mb-16 md:mb-20"
           >
-            Let&apos;s discuss an opportunity.
+            Let&apos;s Discuss an Opportunity.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
@@ -721,6 +902,8 @@ export default function LandingPage() {
         <InvestmentCriteria />
         <About />
         <Mission />
+        <WhoWeWorkWith />
+        <WhyZorka />
         <Portfolio />
         <Contact />
       </main>
