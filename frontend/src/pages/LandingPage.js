@@ -76,14 +76,18 @@ const PORTFOLIO = [
   {
     id: "project-01",
     number: "01",
-    title: "Project Placeholder One",
-    subtitle: "Industrial · Greater Philadelphia",
+    title: "Multi-Family Apartments",
+    subtitle: "North Philadelphia · Developed 2025",
+    image: "/media/portfolio-1.webp",
+    orientation: "landscape",
   },
   {
     id: "project-02",
     number: "02",
-    title: "Project Placeholder Two",
-    subtitle: "Retail · Greater Philadelphia",
+    title: "Multi-Family",
+    subtitle: "North Philadelphia · Developed 2026",
+    image: "/media/portfolio-2.webp",
+    orientation: "portrait",
   },
 ];
 
@@ -710,9 +714,9 @@ function Portfolio() {
             </h2>
           </div>
           <p className="max-w-md text-sm md:text-base font-light text-[#30343B]/70 leading-relaxed">
-            Project images and detailed descriptions will be added as
-            acquisitions are completed and professional photography becomes
-            available.
+            A curated look at recent multifamily developments in North
+            Philadelphia. Additional projects will be added as acquisitions and
+            developments are completed.
           </p>
         </div>
 
@@ -735,24 +739,17 @@ function PortfolioItem({ item, index }) {
       className="portfolio-item fade-in-section group"
       style={{ transitionDelay: `${index * 120}ms` }}
     >
-      <div className="relative overflow-hidden aspect-[4/3] bg-gradient-to-br from-[#E5E7EB] via-[#D8DCE0] to-[#C7CCD1]">
-        <div className="portfolio-placeholder absolute inset-0 w-full h-full flex items-center justify-center">
-          {/* Subtle abstract architectural mark */}
-          <svg
-            viewBox="0 0 200 150"
-            className="w-2/3 h-2/3 opacity-30"
-            fill="none"
-            stroke="#30343B"
-            strokeWidth="0.6"
-          >
-            <rect x="30" y="60" width="140" height="70" />
-            <rect x="50" y="40" width="40" height="90" />
-            <rect x="110" y="30" width="50" height="100" />
-            <line x1="30" y1="130" x2="170" y2="130" strokeWidth="1" />
-            <line x1="20" y1="130" x2="180" y2="130" strokeWidth="0.4" />
-          </svg>
-        </div>
-        <div className="absolute top-6 left-6 text-[10px] uppercase tracking-[0.3em] text-[#30343B]/70 font-medium">
+      <div className="relative overflow-hidden aspect-[4/3] bg-[#0F2742]">
+        <img
+          src={item.image}
+          alt={`${item.title} — ${item.subtitle}`}
+          loading="lazy"
+          className="portfolio-placeholder absolute inset-0 w-full h-full object-cover object-center"
+          draggable={false}
+        />
+        {/* Subtle dark bottom vignette for label readability */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+        <div className="absolute top-6 left-6 text-[10px] uppercase tracking-[0.3em] text-white/85 font-medium">
           {item.number}
         </div>
         <div className="absolute inset-0 border border-[#0F2742]/5" />
@@ -767,7 +764,7 @@ function PortfolioItem({ item, index }) {
           </p>
         </div>
         <span className="text-[10px] uppercase tracking-[0.3em] text-[#B38B45] font-medium whitespace-nowrap">
-          Coming Soon
+          Developed
         </span>
       </div>
     </article>
