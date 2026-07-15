@@ -74,19 +74,19 @@ const WHY_ZORKA = [
 
 const PORTFOLIO = [
   {
-    id: "project-01",
-    number: "01",
-    title: "Multi-Family Apartments",
-    subtitle: "North Philadelphia · Developed 2025",
-    image: "/media/portfolio-1.webp",
-    orientation: "landscape",
-  },
-  {
     id: "project-02",
-    number: "02",
+    number: "01",
     title: "Multi-Family",
     subtitle: "North Philadelphia · Developed 2026",
     image: "/media/portfolio-2.webp",
+    orientation: "portrait",
+  },
+  {
+    id: "project-01",
+    number: "02",
+    title: "Multi-Family Apartments",
+    subtitle: "North Philadelphia · Developed 2025",
+    image: "/media/portfolio-1.webp",
     orientation: "portrait",
   },
 ];
