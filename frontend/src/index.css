@@ -247,3 +247,48 @@ code {
         transparent
     );
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              Business Card                                 */
+/* -------------------------------------------------------------------------- */
+
+.business-card {
+    width: 85mm;
+    height: 55mm;
+    box-shadow:
+        0 30px 60px -30px rgba(15, 39, 66, 0.35),
+        0 12px 24px -12px rgba(15, 39, 66, 0.18);
+    border-radius: 1.5mm;
+}
+
+/* Print rules — exact size, no page chrome, no toolbar */
+@media print {
+    @page {
+        size: 85mm 55mm;
+        margin: 0;
+    }
+    body,
+    html {
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+    .print-sheet {
+        gap: 0 !important;
+        display: block !important;
+    }
+    .business-card {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-after: always;
+        break-after: page;
+        margin: 0 !important;
+    }
+    .business-card:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+}
